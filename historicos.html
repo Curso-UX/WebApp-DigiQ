@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Históricos Dashboard</title>
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css' rel='stylesheet'>
+    <link rel='stylesheet' href='https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css'>
+</head>
+<body style='background-color: #d9e9f7;'>
+
+    <div class='container mt-4'>
+        <!-- Encabezado -->
+        <h2 class='text-center fw-bold'>Históricos Dashboard</h2>
+        <h4 class='text-center fw-semibold'>Creación de usuarios y cuentas.</h4>
+
+        <!-- Sección de Gráficos -->
+        <div class='row mt-4 align-items-center'>
+            <!-- Gráfica de Barras -->
+            <div class='col-md-6'>
+                <h5 class='text-center'>Uso de DigiQ</h5>
+                <div class='bg-white p-3 rounded shadow'>
+                    <canvas id='barChart'></canvas>
+                </div>
+            </div>
+
+            <!-- Gráfica de Torta -->
+            <div class='col-md-6 d-flex flex-column align-items-center'>
+                <h5>Frecuencia Entidades</h5>
+                <div class='bg-white p-3 rounded shadow' style='max-width: 250px;'>
+                    <canvas id='pieChart'></canvas>
+                </div>
+                <p class='mt-2 fw-semibold'>Enero</p>
+            </div>
+        </div>
+
+        <!-- Sección de Tabla y Reportes -->
+        <div class='row mt-4'>
+            <!-- Tabla de eventos -->
+            <div class='col-md-6'>
+                <h5 class='text-center'>Descripción de los eventos</h5>
+                <div class='table-responsive'>
+                    <table id='eventosTable' class='table table-bordered table-striped bg-white'>
+                        <thead class='table-primary'>
+                            <tr>
+                                <th>Día</th>
+                                <th>Hora</th>
+                                <th>Entidad</th>
+                                <th>Resultado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Lunes</td><td>08:00 am</td><td>Venti</td><td>-</td></tr>
+                            <tr><td>Lunes</td><td>09:00 am</td><td>Claro común</td><td>-</td></tr>
+                            <tr><td>Lunes</td><td>10:30 am</td><td>Email</td><td>-</td></tr>
+                            <tr><td>Lunes</td><td>16:00 pm</td><td>Enel</td><td>-</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Opciones de reportes -->
+            <div class='col-md-6'>
+                <h5 class='text-center'>Generar reportes Citas</h5>
+                <div class='mt-3'>
+                    <div class='form-check'>
+                        <input class='form-check-input' type='checkbox' id='porUsuario'>
+                        <label class='form-check-label' for='porUsuario'>Por usuario</label>
+                        <button class='btn btn-primary btn-sm ms-2'>Ver</button>
+                    </div>
+                    <div class='form-check mt-2'>
+                        <input class='form-check-input' type='checkbox' id='porEntidad'>
+                        <label class='form-check-label' for='porEntidad'>Por Entidad</label>
+                        <button class='btn btn-primary btn-sm ms-2'>Ver</button>
+                    </div>
+                    <div class='form-check mt-2'>
+                        <input class='form-check-input' type='checkbox' id='porMes'>
+                        <label class='form-check-label' for='porMes'>Por Mes</label>
+                        <button class='btn btn-primary btn-sm ms-2'>Ver</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts de Bootstrap, DataTables y Chart.js -->
+    <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
+    <script src='https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js'></script>
+
+    <script>
+        // Inicializar DataTable para la tabla de eventos con paginación
+        $(document).ready(function () {
+            $('#eventosTable').DataTable({
+                'paging': true,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'lengthMenu': [5, 10, 15, 20]
+            });
+        });
+
+        // Gráfico de barras
+        const barChart = new Chart(document.getElementById('barChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Enero', 'Febrero', 'Marzo', 'Abril'],
+                datasets: [{
+                    label: 'Eventos',
+                    data: [20, 35, 10, 25],
+                    backgroundColor: '#8CC152'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // Gráfico de torta
+        const pieChart = new Chart(document.getElementById('pieChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Enero', 'Febrero', 'Marzo'],
+                datasets: [{
+                    data: [21, 15, 14],
+                    backgroundColor: ['#343a40', '#007bff', '#ffc107']
+                }]
+            },
+            options: { responsive: true }
+        });
+    </script>
+
+</body>
+</html>
