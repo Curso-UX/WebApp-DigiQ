@@ -41,7 +41,7 @@
         <div style="margin-left: 260px; background: #cfe2f3; width: 100%;">
             <nav class="navbar navbar-expand-lg navbar-light " style="background: #cfe2f3;">
                 <div class="container-fluid" style="background-color: #cfe2f3;">
-                    <a class="navbar-brand" href="#">Navbar</a>
+                    <a class="navbar-brand" href="#">   </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -61,7 +61,7 @@
                                     </i>Históricos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"> <i class="fa fa-question mr-3"
+                                <a class="nav-link" href="#" onclick="cargarFormularioFaq()"> <i class="fa fa-question mr-3" 
                                         aria-hidden="true"></i>FAQ</a>
                             </li>
                             <li class="nav-item">
@@ -114,7 +114,7 @@
                             Item 3
                         </a>
                     </div>
-                    <a href="#profile-items" data-toggle="collapse" aria-expanded="false"
+                    <a href="#profile-items" data-toggle="collapse" aria-expanded="false" onclick="cargarFormularioHistoricos()"
                         class="list-group-item list-group-item-action bg-dark text-light">
                         <i class="fa fa-area-chart mr-3" aria-hidden="true"></i>Gestión de históricos
                     </a>
@@ -126,7 +126,7 @@
                             Item 2
                         </a>
                     </div>
-                    <a href="#" class="list-group-item list-group-item-action bg-dark text-light">
+                    <a href="#" class="list-group-item list-group-item-action bg-dark text-light" onclick="cargarFormularioFaq()">
                         <i class="fa fa-question mr-3" aria-hidden="true"></i>Gestión de FAQ
                     </a>
                     <a href="#setting-items" data-toggle="collapse" aria-expanded="false"
@@ -522,6 +522,82 @@
             }
         }
 
+
+
+        function cargarFormularioFaq() {
+            let html = ` <div class='container my-5'>
+     <div class='card p-4' style='background-color: #cfe2f3; border-radius: 10px;'>
+        <h4 class='text-center'>Preguntas Frecuentes</h4>
+
+        <!-- Tabs -->
+        <ul class='nav nav-tabs' id='faqTabs'>
+            <li class='nav-item'>
+                <a class='nav-link active' data-bs-toggle='tab' href='#general'>General</a>
+            </li>
+            <li class='nav-item'>
+                <a class='nav-link' data-bs-toggle='tab' href='#pregunta'>No encuentro mi pregunta</a>
+            </li>
+        </ul>
+
+        <!-- Contenido de las pestañas -->
+        <div class='tab-content mt-3'>
+            <!-- Tab General -->
+            <div class='tab-pane fade show active' id='general'>
+                <div class='accordion' id='faqAccordion'>
+                    <div class='accordion-item'>
+                        
+                          
+				
+                               ¿Cómo puedo cambiar el sonido de la alarma?<br>
+                                Puedes cambiarlo desde la configuración en la sección de sonido.
+                          <br>
+                                ¿Puedo ver mis recordatorios de citas que ya pasaron?<br>
+                                 Sí, en el historial de citas dentro de la aplicación.
+
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+
+            <!-- Tab No encuentro mi pregunta -->
+            <div class='tab-pane fade' id='pregunta'>
+                <h5>Escribe tu pregunta</h5>
+                <textarea class='form-control mb-3' rows='4' placeholder='Escribe tu pregunta aquí...'></textarea>
+				  <div class='text-end mb-3'>
+					<button class='btn btn-success btn-sm'>Enviar</button>
+				</div>
+
+                <p>Gracias por escribirnos, nos pondremos en contacto lo más pronto posible.</p>
+
+                <!-- Sección de contacto alineada -->
+               <div class='row p-3'>
+				<div class='col-8 mb-3'>Líneas de atención</div>
+				<div class='col-4 text-end mb-3'>
+					<button class='btn btn-primary btn-sm btn-agregar'>Agregar</button>
+				</div>
+
+				<div class='col-8 mb-3'>Asistente Chat</div>
+				<div class='col-4 text-end mb-3'>
+					<button class='btn btn-primary btn-sm btn-agregar'>Agregar</button>
+				</div>
+
+				<div class='col-8 mb-3'>Correo o soporte</div>
+				<div class='col-4 text-end mb-3'>
+					<button class='btn btn-primary btn-sm btn-agregar'>Agregar</button>
+				</div>
+			</div>
+
+            </div>
+        </div>
+     </div>
+</div>
+   
+ `;
+
+            document.getElementById('content').innerHTML = html;
+     
+        }
     </script>
 
     <!-- Optional JavaScript -->
