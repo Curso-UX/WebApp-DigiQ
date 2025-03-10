@@ -64,6 +64,8 @@
     <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
     <script src='https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
 </head>
 
@@ -97,8 +99,8 @@
                                         class="fa fa-question mr-3" aria-hidden="true"></i>FAQ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fa fa-comments mr-3"
-                                        aria-hidden="true"></i>Notificaciones</a>
+                                <a class="nav-link" href="#" onclick="cargarFormularioNotificaciones()"><i
+                                        class="fa fa-comments mr-3" aria-hidden="true"></i>Satisfacción de Usuario</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#" onclick="cargarFormularioDes()"><i class="fa fa-cog mr-3"
@@ -151,47 +153,23 @@
                         class="list-group-item list-group-item-action bg-dark text-light">
                         <i class="fa fa-area-chart mr-3" aria-hidden="true"></i>Gestión de históricos
                     </a>
-                    <div id="profile-items" class="collapse" data-parent="#sidebar-accordion">
-                        <a href="#" class="list-group-item list-group-item-action bg-dark text-light pl-5">
-                            Item 1
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action bg-dark text-light pl-5">
-                            Item 2
-                        </a>
-                    </div>
+
                     <a href="#" class="list-group-item list-group-item-action bg-dark text-light"
                         onclick="cargarFormularioFaq()">
                         <i class="fa fa-question mr-3" aria-hidden="true"></i>Gestión de FAQ
                     </a>
                     <a href="#setting-items" data-toggle="collapse" aria-expanded="false"
+                        onclick="cargarFormularioNotificaciones()"
                         class="list-group-item list-group-item-action bg-dark text-light">
-                        <i class="fa fa-comments mr-3" aria-hidden="true"></i>Gestión de notificaciones
+                        <i class="fa fa-comments mr-3" aria-hidden="true"></i>Satisfacción de Usuario
                     </a>
-                    <div id="setting-items" class="collapse" data-parent="#sidebar-accordion">
-                        <div class="d-flex flex-row text-center">
-                            <a href="#" class="list-group-item list-group-item-action bg-dark text-light">
-                                Item 1
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action bg-dark text-light">
-                                Item 2
-                            </a>
-                        </div>
-                    </div>
+
                     <a href="#setting-items" data-toggle="collapse" aria-expanded="false"
-                        onclick="cargarFormularioFaq()"
+                        onclick="cargarFormularioDes()"
                         class="list-group-item list-group-item-action bg-dark text-light">
                         <i class="fa fa-cog mr-3" aria-hidden="true"></i>Desempeño
                     </a>
-                    <div id="setting-items" class="collapse" data-parent="#sidebar-accordion">
-                        <div class="d-flex flex-row text-center">
-                            <a href="#" class="list-group-item list-group-item-action bg-dark text-light">
-                                Item 1
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action bg-dark text-light">
-                                Item 2
-                            </a>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -432,37 +410,45 @@
             document.getElementById('content').innerHTML = html;
         }
 
+        function cargarFormularioNotificaciones() {
 
-
-        function cargarFormularioDes() {
 
             let html = ` <div class="container mt-5">
         <div class="card p-4" style="background-color: #cfe2f3; border-radius: 10px;">
        
-       <h2 class='text-center fw-bold'>Desempeño DigiQ</h2>
-
-       <!-- Estado de conexión -->
-        <h4><span class="status-indicator"></span> Estado de conexión: <span class="text-success">En línea</span></h4>
-        
-        <!-- Gráfica -->
-        <h5 class="mt-4">Demanda de clientes en la sala de espera</h5>
-        <canvas id="graficaDemanda"></canvas>
-        
-        <!-- Resumen de turnos -->
-        <div class="row mt-4">
-            <div class="col-md-4">
-                <h5><strong>Turnos inscritos:</strong> 165</h5>
-                <h5><strong>Turnos notificados:</strong> 152</h5>
-                <h5><strong>Turnos cancelados:</strong> 13</h5>
+         <div class="row">
+            <!-- Satisfacción del Usuario -->
+            <div class="col-md-6">
+                <h4><strong>Satisfacción del usuario</strong></h4>
+                <ul class="list-unstyled">
+                    <li>Notificaciones anticipadas </li>
+                    <li>Facilidad de uso </li>
+                    <li>Precisión en los tiempos </li>
+                    <li>Funcionalidades completas </li>
+                </ul>
             </div>
-            <div class="col-md-8 d-flex align-items-center">
-                <div class="w-100 border-start ps-4">
-                    <button class="btn btn-primary mb-2">Notificar tardanza <select class="form-select d-inline w-auto ms-2"><option>10 minutos</option><option>15 minutos</option></select></button>
-                    <button class="btn btn-danger mb-2">Notificar falla en el sistema <select class="form-select d-inline w-auto ms-2"><option>El módulo 3 no está disponible</option></select></button>
-                    <button class="btn btn-info">Notificación general <select class="form-select d-inline w-auto ms-2"><option>Los turnos finalizarán a las 17:00</option></select></button>
-                </div>
+            <div class="col-md-6">
+                <canvas id="graficoBarras"></canvas>
             </div>
         </div>
+        <hr>
+        <div class="row">
+            <!-- Satisfacción de los Clientes -->
+            <div class="col-md-6">
+                <h4><strong>Satisfacción de los clientes</strong></h4>
+                <ul class="list-unstyled">
+                    <li>Reducción de tiempos de espera </li>
+                    <li>Mayor eficiencia para atender </li>
+                    <li>Ahorro económico </li>
+                    <li>Segmentación de los usuarios </li>
+                    <li>Priorización automática de turnos </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <canvas id="graficoPastel"></canvas>
+            </div>
+        </div>
+
        
  
 
@@ -471,6 +457,52 @@
   
    </div>
   
+`;
+
+            document.getElementById('content').innerHTML = html;
+            setTimeout(() => {
+                inicializarGraficosNotificaciones();
+            }, 1000);
+
+        }
+
+        function cargarFormularioDes() {
+
+            let html = ` <div class="container mt-5">
+<div class="card p-4" style="background-color: #cfe2f3; border-radius: 10px;">
+
+<h2 class='text-center fw-bold'>Desempeño DigiQ</h2>
+
+<!-- Estado de conexión -->
+<h4><span class="status-indicator"></span> Estado de conexión: <span class="text-success">En línea</span></h4>
+
+<!-- Gráfica -->
+<h5 class="mt-4">Demanda de clientes en la sala de espera</h5>
+<canvas id="graficaDemanda"></canvas>
+
+<!-- Resumen de turnos -->
+<div class="row mt-4">
+<div class="col-md-4">
+    <h5><strong>Turnos inscritos:</strong> 165</h5>
+    <h5><strong>Turnos notificados:</strong> 152</h5>
+    <h5><strong>Turnos cancelados:</strong> 13</h5>
+</div>
+<div class="col-md-8 d-flex align-items-center">
+    <div class="w-100 border-start ps-4">
+        <button class="btn btn-primary mb-2">Notificar tardanza <select class="form-select d-inline w-auto ms-2"><option>10 minutos</option><option>15 minutos</option></select></button>
+        <button class="btn btn-danger mb-2">Notificar falla en el sistema <select class="form-select d-inline w-auto ms-2"><option>El módulo 3 no está disponible</option></select></button>
+        <button class="btn btn-info">Notificación general <select class="form-select d-inline w-auto ms-2"><option>Los turnos finalizarán a las 17:00</option></select></button>
+    </div>
+</div>
+</div>
+
+
+
+
+</div>
+
+</div>
+
 `;
 
             document.getElementById('content').innerHTML = html;
@@ -624,6 +656,38 @@
                         tension: 0.2
                     }]
                 }
+            });
+        }
+
+        function inicializarGraficosNotificaciones() {
+
+            // Gráfico de Barras
+            var ctxBarras = document.getElementById('graficoBarras').getContext('2d');
+            new Chart(ctxBarras, {
+                type: 'bar',
+                data: {
+                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril'],
+                    datasets: [{
+                        label: 'Satisfacción',
+                        data: [10, 14, 12, 19],
+                        backgroundColor: 'rgba(75, 192, 75, 0.6)'
+                    }]
+                },
+                options: { responsive: true }
+            });
+
+            // Gráfico de Pastel
+            var ctxPastel = document.getElementById('graficoPastel').getContext('2d');
+            new Chart(ctxPastel, {
+                type: 'pie',
+                data: {
+                    labels: ['Categoría 1', 'Categoría 2', 'Categoría 3', 'Categoría 4', 'Categoría 5'],
+                    datasets: [{
+                        data: [107, 689, 747, 840, 500],
+                        backgroundColor: ['#28a745', '#20c997', '#17a2b8', '#ffc107', '#fd7e14']
+                    }]
+                },
+                options: { responsive: true }
             });
         }
 

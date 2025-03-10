@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Satisfacción</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body class="p-4">
+    <div class="container">
+        <div class="row">
+            <!-- Satisfacción del Usuario -->
+            <div class="col-md-6">
+                <h4><strong>Satisfacción del usuario</strong></h4>
+                <ul class="list-unstyled">
+                    <li>Notificaciones anticipadas <i class="fas fa-spinner fa-spin text-primary"></i></li>
+                    <li>Facilidad de uso <i class="fas fa-spinner fa-spin text-primary"></i></li>
+                    <li>Precisión en los tiempos <i class="fas fa-spinner fa-spin text-primary"></i></li>
+                    <li>Funcionalidades completas <i class="fas fa-spinner fa-spin text-primary"></i></li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <canvas id="graficoBarras"></canvas>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <!-- Satisfacción de los Clientes -->
+            <div class="col-md-6">
+                <h4><strong>Satisfacción de los clientes</strong></h4>
+                <ul class="list-unstyled">
+                    <li>Reducción de tiempos de espera <i class="fas fa-spinner fa-spin text-primary"></i></li>
+                    <li>Mayor eficiencia para atender <i class="fas fa-spinner fa-spin text-primary"></i></li>
+                    <li>Ahorro económico <i class="fas fa-spinner fa-spin text-primary"></i></li>
+                    <li>Segmentación de los usuarios <i class="fas fa-spinner fa-spin text-primary"></i></li>
+                    <li>Priorización automática de turnos <i class="fas fa-spinner fa-spin text-primary"></i></li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <canvas id="graficoPastel"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gráfico de Barras
+        var ctxBarras = document.getElementById('graficoBarras').getContext('2d');
+        new Chart(ctxBarras, {
+            type: 'bar',
+            data: {
+                labels: ['Enero', 'Febrero', 'Marzo', 'Abril'],
+                datasets: [{
+                    label: 'Satisfacción',
+                    data: [10, 14, 12, 19],
+                    backgroundColor: 'rgba(75, 192, 75, 0.6)'
+                }]
+            },
+            options: { responsive: true }
+        });
+
+        // Gráfico de Pastel
+        var ctxPastel = document.getElementById('graficoPastel').getContext('2d');
+        new Chart(ctxPastel, {
+            type: 'pie',
+            data: {
+                labels: ['Categoría 1', 'Categoría 2', 'Categoría 3', 'Categoría 4', 'Categoría 5'],
+                datasets: [{
+                    data: [107, 689, 747, 840, 500],
+                    backgroundColor: ['#28a745', '#20c997', '#17a2b8', '#ffc107', '#fd7e14']
+                }]
+            },
+            options: { responsive: true }
+        });
+    </script>
+</body>
+</html>
