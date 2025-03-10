@@ -47,7 +47,7 @@
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="#"
-                                    onclick="cargarGestionUsuarios()">
+                                    onclick="cargarFormularioUsuarios()">
                                     <i class="fa fa-user mr-3" aria-hidden="true"></i>
                                     Usuarios</a>
                             </li>
@@ -188,7 +188,7 @@
 
         function cargarGestionUsuarios() {
             let html = `
-    
+    <div class="card p-4" style="background-color: #cfe2f3; border-radius: 10px;">
 
         <div class='container bg-white p-4 rounded shadow-lg'>
             <header class='d-flex gap-2 mb-3'>
@@ -305,7 +305,89 @@
                 </div>
                 <span class='text-muted'>9:41 AM</span>
             </div>
-        </div>`;
+        </div> </div>`;
+
+            document.getElementById('content').innerHTML = html;
+        }
+
+        function cargarFormularioUsuarios() {
+            let html = `
+    
+ <div class="container mt-5">
+        <div class="card p-4" style="background-color: #cfe2f3; border-radius: 10px;">
+            <h4 class="text-center mb-4">Creación de usuarios y cuentas</h4>
+            <form>
+                <div class="mb-3">
+                    <label class="form-label">Buscar</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Ingrese el nombre del usuario a buscar">
+                        <button class="btn btn-secondary">Buscar</button>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Primer Nombre</label>
+                    <input type="text" class="form-control" placeholder="Ingrese su nombre">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Segundo Nombre</label>
+                    <input type="text" class="form-control" placeholder="Ingrese su segundo nombre">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Primer Apellido</label>
+                    <input type="text" class="form-control" placeholder="Ingrese su primer apellido">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Segundo Apellido</label>
+                    <input type="text" class="form-control" placeholder="Ingrese su segundo apellido">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Celular</label>
+                    <input type="text" class="form-control" placeholder="Ingrese su teléfono">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Correo Electrónico</label>
+                    <input type="email" class="form-control" placeholder="Ingrese su correo electrónico">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Confirme Correo</label>
+                    <input type="email" class="form-control" placeholder="Confirme su correo electrónico">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Dirección</label>
+                    <input type="text" class="form-control" placeholder="Ingrese su dirección">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Teléfono</label>
+                    <input type="text" class="form-control" placeholder="Ingrese su teléfono">
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <button type="reset" class="btn btn-primary">Limpiar</button>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </div>
+            </form>
+
+            <div class="mt-4">
+                <label class="form-label">Cargas Masivas:</label>
+                <div class="input-group">
+                    <input type="file" class="form-control">
+                    <button class="btn btn-secondary"><i class="fa fa-upload"></i></button>
+                </div>
+                <div class="text-end mt-2">
+                    <button class="btn btn-success">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>`;
 
             document.getElementById('content').innerHTML = html;
         }
