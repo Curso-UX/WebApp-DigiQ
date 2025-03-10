@@ -38,6 +38,7 @@
             text-align: center;
             width: 40%;
         }
+
         .popup .close {
             cursor: pointer;
             color: #6b5b95;
@@ -45,6 +46,15 @@
             margin-top: 10px;
             display: block;
             font-size: small;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            background-color: green;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
         }
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -63,7 +73,7 @@
         <div style="margin-left: 260px; background: #cfe2f3; width: 100%;">
             <nav class="navbar navbar-expand-lg navbar-light " style="background: #cfe2f3;">
                 <div class="container-fluid" style="background-color: #cfe2f3;">
-                    <a class="navbar-brand" href="#">   </a>
+                    <a class="navbar-brand" href="#"> </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -83,15 +93,15 @@
                                     </i>Históricos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" onclick="cargarFormularioFaq()"> <i class="fa fa-question mr-3" 
-                                        aria-hidden="true"></i>FAQ</a>
+                                <a class="nav-link" href="#" onclick="cargarFormularioFaq()"> <i
+                                        class="fa fa-question mr-3" aria-hidden="true"></i>FAQ</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#"><i class="fa fa-comments mr-3"
                                         aria-hidden="true"></i>Notificaciones</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fa fa-cog mr-3"
+                                <a class="nav-link" href="#" onclick="cargarFormularioDes()"><i class="fa fa-cog mr-3"
                                         aria-hidden="true"></i>Desempeño</a>
                             </li>
 
@@ -136,7 +146,8 @@
                             Item 3
                         </a>
                     </div>
-                    <a href="#profile-items" data-toggle="collapse" aria-expanded="false" onclick="cargarFormularioHistoricos()"
+                    <a href="#profile-items" data-toggle="collapse" aria-expanded="false"
+                        onclick="cargarFormularioHistoricos()"
                         class="list-group-item list-group-item-action bg-dark text-light">
                         <i class="fa fa-area-chart mr-3" aria-hidden="true"></i>Gestión de históricos
                     </a>
@@ -148,7 +159,8 @@
                             Item 2
                         </a>
                     </div>
-                    <a href="#" class="list-group-item list-group-item-action bg-dark text-light" onclick="cargarFormularioFaq()">
+                    <a href="#" class="list-group-item list-group-item-action bg-dark text-light"
+                        onclick="cargarFormularioFaq()">
                         <i class="fa fa-question mr-3" aria-hidden="true"></i>Gestión de FAQ
                     </a>
                     <a href="#setting-items" data-toggle="collapse" aria-expanded="false"
@@ -166,6 +178,7 @@
                         </div>
                     </div>
                     <a href="#setting-items" data-toggle="collapse" aria-expanded="false"
+                        onclick="cargarFormularioFaq()"
                         class="list-group-item list-group-item-action bg-dark text-light">
                         <i class="fa fa-cog mr-3" aria-hidden="true"></i>Desempeño
                     </a>
@@ -419,6 +432,55 @@
             document.getElementById('content').innerHTML = html;
         }
 
+
+
+        function cargarFormularioDes() {
+
+            let html = ` <div class="container mt-5">
+        <div class="card p-4" style="background-color: #cfe2f3; border-radius: 10px;">
+       
+       <h2 class='text-center fw-bold'>Desempeño DigiQ</h2>
+
+       <!-- Estado de conexión -->
+        <h4><span class="status-indicator"></span> Estado de conexión: <span class="text-success">En línea</span></h4>
+        
+        <!-- Gráfica -->
+        <h5 class="mt-4">Demanda de clientes en la sala de espera</h5>
+        <canvas id="graficaDemanda"></canvas>
+        
+        <!-- Resumen de turnos -->
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <h5><strong>Turnos inscritos:</strong> 165</h5>
+                <h5><strong>Turnos notificados:</strong> 152</h5>
+                <h5><strong>Turnos cancelados:</strong> 13</h5>
+            </div>
+            <div class="col-md-8 d-flex align-items-center">
+                <div class="w-100 border-start ps-4">
+                    <button class="btn btn-primary mb-2">Notificar tardanza <select class="form-select d-inline w-auto ms-2"><option>10 minutos</option><option>15 minutos</option></select></button>
+                    <button class="btn btn-danger mb-2">Notificar falla en el sistema <select class="form-select d-inline w-auto ms-2"><option>El módulo 3 no está disponible</option></select></button>
+                    <button class="btn btn-info">Notificación general <select class="form-select d-inline w-auto ms-2"><option>Los turnos finalizarán a las 17:00</option></select></button>
+                </div>
+            </div>
+        </div>
+       
+ 
+
+       
+</div>
+  
+   </div>
+  
+`;
+
+            document.getElementById('content').innerHTML = html;
+            setTimeout(() => {
+                inicializarGraficosDesempenio();
+            }, 1000);
+
+        }
+
+
         function cargarFormularioHistoricos() {
             let html = ` <div class='container mt-4'>
        
@@ -544,6 +606,26 @@
             }
         }
 
+        function inicializarGraficosDesempenio() {
+
+
+            // Datos para la gráfica (ejemplo basado en la imagen)
+            const ctx = document.getElementById('graficaDemanda').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
+                    datasets: [{
+                        label: 'Demanda de clientes',
+                        data: [10, 18, 14, 20, 25, 12, 8, 16, 22, 14],
+                        borderColor: 'blue',
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.2
+                    }]
+                }
+            });
+        }
 
 
         function cargarFormularioFaq() {
@@ -618,7 +700,7 @@
  `;
 
             document.getElementById('content').innerHTML = html;
-     
+
         }
 
 
@@ -626,28 +708,28 @@
 
 
         function openPopup() {
-        document.getElementById('popup').style.display = 'block';
-    }
+            document.getElementById('popup').style.display = 'block';
+        }
 
-    function closePopup() {
-        document.getElementById('popup').style.display = 'none';
-    }
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
 
-    function openPopupAyuda() {
-        document.getElementById('popupAyuda').style.display = 'block';
-    }
+        function openPopupAyuda() {
+            document.getElementById('popupAyuda').style.display = 'block';
+        }
 
-    function closePopupAyuda() {
-        document.getElementById('popupAyuda').style.display = 'none';
-    }
+        function closePopupAyuda() {
+            document.getElementById('popupAyuda').style.display = 'none';
+        }
 
         function openPopupCookies() {
-        document.getElementById('popupCookies').style.display = 'block';
-    }
+            document.getElementById('popupCookies').style.display = 'block';
+        }
 
-    function closePopupCookies() {
-        document.getElementById('popupCookies').style.display = 'none';
-    }
+        function closePopupCookies() {
+            document.getElementById('popupCookies').style.display = 'none';
+        }
     </script>
 
     <!-- Optional JavaScript -->
@@ -674,22 +756,22 @@
         <p>Lunes a Viernes 8:00 a.m. a 5:00 p.m.</p>
         <span class="close" onclick="closePopup()">Cerrar</span>
     </div>
-    
+
     <div class="popup" id="popupCookies">
         <h3>Cookies</h3>
         <p><strong>DigiQ</strong></p>
-    
-        <p>En este portal utilizamos datos de navegación / cookies 
-            propias y de terceros para gestionar el portal, 
+
+        <p>En este portal utilizamos datos de navegación / cookies
+            propias y de terceros para gestionar el portal,
             elaborar información estadística, optimizar la funcionalidad del sitio y
-             mostrar publicidad relacionada con sus preferencias a través del análisis de la navegación.
-             Si continúa navegando, usted estará aceptando esta utilización. Puede conocer cómo deshabilitarlas 
-             u obtener más información aquí</p>
-        
+            mostrar publicidad relacionada con sus preferencias a través del análisis de la navegación.
+            Si continúa navegando, usted estará aceptando esta utilización. Puede conocer cómo deshabilitarlas
+            u obtener más información aquí</p>
+
         <span class="close" onclick="closePopupCookies()">Cerrar</span>
     </div>
-    
-    
+
+
     <div class="popup" id="popupAyuda">
         <h3>Centro de ayuda</h3>
         <p><strong>DigiQ</strong></p>
