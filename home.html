@@ -24,6 +24,28 @@
             padding-top: 60px;
 
         }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #d0eaff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 40%;
+        }
+        .popup .close {
+            cursor: pointer;
+            color: #6b5b95;
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+            font-size: small;
+        }
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -177,9 +199,9 @@
         </div>
         <div>
             <ul>
-                <li onclick="openPopup()">Información de contacto</li>
-                <li>Ayuda</li>
-                <li>Cookies</li>
+                <li onclick="openPopup()" style="cursor: pointer;">Información de contacto</li>
+                <li onclick="openPopupAyuda()" style="cursor: pointer;">Ayuda</li>
+                <li onclick="openPopupCookies()" style="cursor: pointer;">Cookies</li>
             </ul>
         </div>
     </div>
@@ -598,6 +620,34 @@
             document.getElementById('content').innerHTML = html;
      
         }
+
+
+
+
+
+        function openPopup() {
+        document.getElementById('popup').style.display = 'block';
+    }
+
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+    }
+
+    function openPopupAyuda() {
+        document.getElementById('popupAyuda').style.display = 'block';
+    }
+
+    function closePopupAyuda() {
+        document.getElementById('popupAyuda').style.display = 'none';
+    }
+
+        function openPopupCookies() {
+        document.getElementById('popupCookies').style.display = 'block';
+    }
+
+    function closePopupCookies() {
+        document.getElementById('popupCookies').style.display = 'none';
+    }
     </script>
 
     <!-- Optional JavaScript -->
@@ -614,6 +664,47 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
+    <div class="popup" id="popup">
+        <h3>Información de contacto</h3>
+        <p><strong>DigiQ</strong></p>
+        <p>Dirección Sede Principal:</p>
+        <p>Carrera 13 A No. 59-24 piso 8. Bogotá, Colombia.</p>
+        <p>Código postal: 111041</p>
+        <p>Horario de atención Telefónico, Teams y Chat:</p>
+        <p>Lunes a Viernes 8:00 a.m. a 5:00 p.m.</p>
+        <span class="close" onclick="closePopup()">Cerrar</span>
+    </div>
+    
+    <div class="popup" id="popupCookies">
+        <h3>Cookies</h3>
+        <p><strong>DigiQ</strong></p>
+    
+        <p>En este portal utilizamos datos de navegación / cookies 
+            propias y de terceros para gestionar el portal, 
+            elaborar información estadística, optimizar la funcionalidad del sitio y
+             mostrar publicidad relacionada con sus preferencias a través del análisis de la navegación.
+             Si continúa navegando, usted estará aceptando esta utilización. Puede conocer cómo deshabilitarlas 
+             u obtener más información aquí</p>
+        
+        <span class="close" onclick="closePopupCookies()">Cerrar</span>
+    </div>
+    
+    
+    <div class="popup" id="popupAyuda">
+        <h3>Centro de ayuda</h3>
+        <p><strong>DigiQ</strong></p>
+        <p>Teléfonos:</p>
+        <p>(+57) PBX general: (+601) 399 03 00 / Línea Bogotá: (+601) 489 92 99.</p>
+        <p>Línea Gratuita Nacional:</p>
+        <p>01 8000 115212</p>
+        <p>Whatsapp:</p>
+        <p>322 3465804</p>
+        <p>Correo Institucional:</p>
+        <p>atencionalciudadano@digiq.com</p>
+        <p>Horario de atención:</p>
+        <p>Lunes a viernes de 8am a 5pm.</p>
+        <span class="close" onclick="closePopupAyuda()">Cerrar</span>
+    </div>
 </body>
 
 </html>
