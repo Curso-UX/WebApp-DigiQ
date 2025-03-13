@@ -2,7 +2,8 @@
 
 Para realizar las pruebas sob la parte web siga las siguientes indicaciones:
 
-1) Descargar este proyecto.
+1) Descargar este proyecto como zip o clonar
+.
 2) Una vez descargado ir a la carpeta raiz.
 3) Dar click en el fichero login.html.
 4) Navegar desde la pantalla login.
